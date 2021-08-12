@@ -1,6 +1,6 @@
 package entities;
 
-public class Individual extends Payer{
+public class Individual extends TaxPayer{
 	
 	private Double healthExpenditures = 0.00;
 
@@ -19,14 +19,10 @@ public class Individual extends Payer{
 		this.healthExpenditures = healthExpenditures;
 	}
 	@Override
-	public double totalTaxes() {
-
-		if (this.getAnualIncome() < 20000.00) {
-			return (this.getAnualIncome()*0.15) - (healthExpenditures*0.5);
-		}else {
-			return (this.getAnualIncome()*0.25) - (healthExpenditures*0.5);
-		}
-		
+	public double tax() {
+		// se o ganho anual for inferior a 20000 imposto de 15%, senão imposto de 25%. Subtrai 50% dos gastos com saúde
+		return (getAnualIncome() < 20000 ? getAnualIncome() * 0.15 : getAnualIncome() * 0.25) - healthExpenditures*0.5;
+	
 	}
 
 }

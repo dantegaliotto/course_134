@@ -7,7 +7,7 @@ import java.util.Scanner;
 
 import entities.Company;
 import entities.Individual;
-import entities.Payer;
+import entities.TaxPayer;
 
 public class Program {
 
@@ -16,7 +16,7 @@ public class Program {
 		Locale.setDefault(Locale.US);
 		Scanner sc = new Scanner(System.in);
 		
-		List<Payer> list = new ArrayList<>();
+		List<TaxPayer> list = new ArrayList<>();
 		
 		System.out.print("Enter the number of tax payers: ");
 		int n = sc.nextInt();
@@ -46,13 +46,16 @@ public class Program {
 		}
 		
 		System.out.println("TAXES PAID:");
-		double totalTaxes = 0;
-		for (Payer p : list) {
-			System.out.println(p.getName() + ": $ " + String.format("%.2f",p.totalTaxes()));
-			totalTaxes += p.totalTaxes();
+		for (TaxPayer tp : list) {
+			System.out.println(tp.getName() + ": $ " + String.format("%.2f",tp.tax()));
+		}
+		double sum = 0.0;
+		for (TaxPayer tp : list) {
+			sum += tp.tax();
 		}
 
-		System.out.println("\nTOTAL TAXES: $" + String.format("%.2f",totalTaxes));
+		
+		System.out.println("\nTOTAL TAXES: $" + String.format("%.2f", sum));
 		
 	}
 
